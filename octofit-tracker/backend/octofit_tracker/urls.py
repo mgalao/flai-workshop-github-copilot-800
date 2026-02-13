@@ -34,12 +34,14 @@ router.register(r'activities', ActivityViewSet)
 router.register(r'leaderboard', LeaderboardViewSet)
 router.register(r'workouts', WorkoutViewSet)
 
-# Get the base URL for the API
+# Get the base URL for the API based on environment
+# REST API endpoint format: https://$CODESPACE_NAME-8000.app.github.dev/api/[component]/
+# Example: https://$CODESPACE_NAME-8000.app.github.dev/api/activities/
 codespace_name = os.environ.get('CODESPACE_NAME')
 if codespace_name:
-    base_url = f"https://{codespace_name}-8000.app.github.dev"
+    BASE_URL = f"https://{codespace_name}-8000.app.github.dev"
 else:
-    base_url = "http://localhost:8000"
+    BASE_URL = "http://localhost:8000"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
